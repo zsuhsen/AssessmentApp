@@ -27,6 +27,7 @@ export class EmployeeCrudComponent implements OnInit {
   ngOnInit() {
     this.employeeForm = this.formBuilder.group({
       name: new FormControl(this.employee ? this.employee.name : '', Validators.required),
+      jobTitle: new FormControl(this.employee ? this.employee.jobTitle : '', Validators.required),
       phoneNumber: new FormControl(this.employee ? this.employee.phoneNumber : '', [Validators.required, this.phoneNumberValidator()]),
       fax: new FormControl(this.employee ? this.employee.fax : '', [Validators.required, this.phoneNumberValidator()]),
       email: new FormControl(this.employee ? this.employee.email : '', [Validators.required, this.emailValidator()])
@@ -34,8 +35,12 @@ export class EmployeeCrudComponent implements OnInit {
   }
 
   onSumbit() {
-    const newEmployee: IEmployee = Object.assign({}, this.employee, this.employeeForm.value);
-    this.save.emit(newEmployee);
+    if (this.employeeForm.valid) {
+      const newEmployee: IEmployee = Object.assign({}, this.employee, this.employeeForm.value);
+      this.save.emit(newEmployee);
+    } else {
+      this.employeeForm.markAllAsTouched();
+    }
   }
 
   phoneNumberValidator(): ValidatorFn {

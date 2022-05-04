@@ -1,6 +1,7 @@
 import { CommonModule } from "@angular/common";
 import { NgModule } from "@angular/core";
 import { ReactiveFormsModule } from "@angular/forms";
+import { GridModule } from "../grid/grid.module";
 import { EmployeeCrudComponent } from "./employee-crud/employee-crud.component";
 import { EmployeeComponent } from "./employee.component";
 import { EmployeeService } from "./services/employee.service";
@@ -16,7 +17,8 @@ import { EmployeeService } from "./services/employee.service";
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    GridModule
   ],
   providers: [
     EmployeeService

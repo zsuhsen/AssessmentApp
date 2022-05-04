@@ -1,0 +1,19 @@
+.table-detail-container {
+  height: 2rem;
+  padding: 3px;
+  margin-left: 1rem;
+}
+
+table {
+  border: 1px solid;
+}
+
+th, td {
+  border-bottom: 1px solid #ddd;
+  white-space: nowrap;
+}
+
+.dynamic-column {
+  text-overflow: ellipsis;
+}
+

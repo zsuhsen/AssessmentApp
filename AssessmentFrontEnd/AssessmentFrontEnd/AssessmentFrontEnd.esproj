@@ -12,6 +12,7 @@
   <ItemGroup>
     <Folder Include="src\app\employee\employee-crud\" />
     <Folder Include="src\app\employee\services\" />
+    <Folder Include="src\app\grid\" />
     <Folder Include="src\app\workspace\" />
   </ItemGroup>
   <!-- This target is copied from the ASP.NET SPA template in order to ensure node_modules are in place. -->

@@ -16,6 +16,12 @@ SELECT * FROM Employee;
 // Add Column fax
 ALTER TABLE Employee ADD COLUMN fax VARCHAR(12);
 
+// Add Column isActive
+ALTER TABLE Employee ADD COLUMN isActive INTEGER DEFAULT 1;
+
+// Add Column jobTitle
+ALTER TABLE Employee ADD COLUMN jobTitle VARCHAR(50) DEFAULT 'Engineer';
+
 ### Project Table
 
 // Create

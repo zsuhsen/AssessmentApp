@@ -1,6 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { FormBuilder } from "@angular/forms";
 import { first } from "rxjs/operators";
+import { IGridColumnModel, IGridModel } from "../grid/grid.model";
 import { IEmployee } from "./employee.model";
 import { EmployeeService } from "./services/employee.service";
 
@@ -16,7 +17,11 @@ export class EmployeeComponent implements OnInit {
   enableAddUpdate: boolean = false;
   employeeToUpdate: IEmployee;
 
+  selectedDetail: number;
+
   employees: IEmployee[];
+
+  gridModel: IGridModel;
 
   constructor(private employeeService: EmployeeService) {
 
@@ -24,17 +29,38 @@ export class EmployeeComponent implements OnInit {
 
   ngOnInit() {
     this.employeeService.getEmployees().pipe(first()).subscribe(employees => {
-      
-      this.employees = employees;
+      this.employees = employees.filter(e => e.isActive);
+      this.buildGridModel();
       this.isLoaded = true;
     });
+  }
+
+  buildGridModel(): void {
+    this.gridModel = {
+      idField: 'id',
+      columns: [
+        <IGridColumnModel>{
+          header: 'Name',
+          field: 'name'
+        },
+        <IGridColumnModel>{
+          header: 'Phone Number',
+          field: 'phoneNumber'
+        },
+        <IGridColumnModel>{
+          header: 'Email',
+          field: 'email'
+        }
+      ],
+      data: this.employees
+    }
   }
 
   onSave(employee: IEmployee) {
     this.employeeService.saveEmployee(employee).pipe(first()).subscribe((result: IEmployee) => {
       console.log({ result });
       if (result?.id > 0) {
-        this.employees.push(employee);
+        this.employees.push(result);
       } else {
         const updatedEmpIndex = this.employees.findIndex(e => e.id === employee.id);
         this.employees.splice(updatedEmpIndex, 1, employee);
@@ -51,7 +77,6 @@ export class EmployeeComponent implements OnInit {
       this.employeeToUpdate = employee;
     }
     this.enableAddUpdate = true;
-    console.log('employee delete', employee);
   }
 
   onCloseAddUpdate() {
@@ -59,15 +84,19 @@ export class EmployeeComponent implements OnInit {
     this.enableAddUpdate = false;
   }
 
-  onDelete(employee: IEmployee) {
-    this.employeeService.deleteEmployee(employee.id).pipe(first()).subscribe(result => {
+  onDelete(id: number) {
+    this.employeeService.deleteEmployee(id).pipe(first()).subscribe(result => {
       console.log({ result });
       if (result) {
-        const deletedEmpIndex = this.employees.findIndex(e => e.id === employee.id);
+        const deletedEmpIndex = this.employees.findIndex(e => e.id === id);
 
         this.employees.splice(deletedEmpIndex, 1);
       }
     });
+  }
+
+  openDetail(id: number) {
+    this.selectedDetail = this.selectedDetail !== id ? id : null;
   }
 
 }

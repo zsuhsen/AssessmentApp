@@ -45,7 +45,9 @@ namespace DataAccess
                     Name = reader.GetString(1),
                     PhoneNumber = reader.GetString(2),
                     Email = reader.GetString(3),
-                    Fax = reader.GetString(4)
+                    Fax = reader.GetString(4),
+                    IsActive = reader.GetBoolean(5),
+                    JobTitle = reader.GetString(6)
                 });
             }
 
@@ -62,8 +64,12 @@ namespace DataAccess
             SQLiteCommand command;
 
             command = conn.CreateCommand();
-            command.CommandText = $"INSERT INTO Employee (name, phoneNumber, email, fax)" +
-                $"VALUES ('{employee.Name}', '{employee.PhoneNumber}', '{employee.Email}', '{employee.Fax}')";
+            command.CommandText = $"INSERT INTO Employee (name, phoneNumber, email, fax, jobTitle)" +
+                $"VALUES ('{employee.Name}', " +
+                $"'{employee.PhoneNumber}', " +
+                $"'{employee.Email}', " +
+                $"'{employee.Fax}', " +
+                $"'{employee.JobTitle}')";
 
             Employee result;
             try
@@ -96,7 +102,8 @@ namespace DataAccess
                 $"name = '{employee.Name}'," +
                 $"phoneNumber = '{employee.PhoneNumber}'," +
                 $"fax = '{employee.Fax}'," +
-                $"email = '{employee.Email}'" +
+                $"email = '{employee.Email}'," +
+                $"jobTitle = '{employee.JobTitle}' " +
                 $"WHERE id = {employee.Id};";
 
             int result;
@@ -124,7 +131,9 @@ namespace DataAccess
             SQLiteCommand command;
 
             command = conn.CreateCommand();
-            command.CommandText = $"DELETE FROM Employee WHERE id = {employeeId}";
+            command.CommandText = $"UPDATE Employee SET " +
+                $"isActive = 0 " +
+                $"WHERE id = {employeeId};";
 
             int result;
             try
@@ -161,7 +170,10 @@ namespace DataAccess
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
                     PhoneNumber = reader.GetString(2),
-                    Email = reader.GetString(3)
+                    Email = reader.GetString(3),
+                    Fax = reader.GetString(4),
+                    IsActive = reader.GetBoolean(5),
+                    JobTitle = reader.GetString(6)
                 });
             }
 

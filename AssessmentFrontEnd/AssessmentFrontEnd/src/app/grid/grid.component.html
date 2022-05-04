@@ -1,0 +1,26 @@
+<table>
+  <thead>
+    <tr>
+      <th>    </th>
+      <th *ngFor="let col of gridModel.columns">{{col.header}}</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody *ngFor="let model of gridModel.data">
+    <tr>
+      <td><button type="button" (click)="openDetail(model)">...</button></td>
+      <td class="dynamic-column" *ngFor="let col of gridModel.columns">{{model[col.field]}}</td>
+      <td>
+        <button type="button" (click)="onUpdate.emit(model)">Edit</button>
+        <button type="button" (click)="onDelete.emit(model[gridModel.idField])">Delete</button>
+      </td>
+    </tr>
+    <tr *ngIf="selectedDetail === model[gridModel.idField]">
+      <td colspan="5">
+        <div class="table-detail-container">
+          <ng-template [ngTemplateOutlet]="templateRef" [ngTemplateOutletContext]="{$implicit: model}"></ng-template>
+        </div>
+      </td>
+    </tr>
+  </tbody>
+</table>
