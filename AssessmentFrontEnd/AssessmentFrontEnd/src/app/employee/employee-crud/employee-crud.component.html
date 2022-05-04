@@ -1,0 +1,23 @@
+<div *ngIf="employeeForm">
+  <form [formGroup]="employeeForm">
+    <div>
+      <input id="name" type="text" formControlName="name">
+    </div>
+    <div>
+      <input id="phoneNumber" type="text" placeholder="###-###-####" formControlName="phoneNumber">
+      <div class="errors" *ngIf="employeeForm.get('phoneNumber').dirty">
+        <span *ngIf="employeeForm.get('phoneNumber').errors?.['invalid']">Must be format ###-###-####</span>
+        <span *ngIf="employeeForm.get('phoneNumber').errors?.['required']">Required!</span>
+      </div>
+
+    </div>
+    <div>
+      <input id="email" type="text" placeholder="abc@email.net" formControlName="email">
+      <div class="errors" *ngIf="employeeForm.get('email').dirty">
+        <span *ngIf="employeeForm.get('email').errors?.['invalid']">Must be format abc@email.net</span>
+        <span *ngIf="employeeForm.get('email').errors?.['required']">Required!</span>
+      </div>
+    </div>
+    <button (click)="onSumbit()">{{employee ? 'Update Employee' : 'Add Employee'}}</button>
+  </form>
+</div>

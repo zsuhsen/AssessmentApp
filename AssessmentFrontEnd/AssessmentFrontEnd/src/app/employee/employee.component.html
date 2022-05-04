@@ -1,0 +1,23 @@
+<table *ngIf="isLoaded">
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Phone Number</th>
+      <th>Email</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let employee of employees">
+      <td>{{employee.name}}</td>
+      <td>{{employee.phoneNumber}}</td>
+      <td>{{employee.email}}</td>
+      <td>
+        <button type="button" (click)="onUpdate(employee)">Update</button>
+        <button type="button" (click)="onDelete(employee)">Delete</button>
+      </td>
+    </tr>
+  </tbody>
+ </table>
+
+ <employee-crud (save)="onSave($event)"></employee-crud>

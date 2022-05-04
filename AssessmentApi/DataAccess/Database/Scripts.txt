@@ -1,0 +1,31 @@
+﻿// This file contains scripts ran on the sqlite database 
+
+
+### Employee Table
+
+// Create
+
+CREATE TABLE IF NOT EXISTS Employee 
+(id INTEGER PRIMARY KEY AUTOINCREMENT, 
+name VARCHAR(50), 
+phoneNumber VARCHAR(12), 
+email VARCHAR(75));
+
+// Select all 
+
+SELECT * FROM Employee;
+
+### Project Table
+
+// Create
+
+CREATE TABLE IF NOT EXISTS Project
+(id INTEGER PRIMARY KEY AUTOINCREMENT, 
+name VARCHAR(50),
+contact VARCHAR(50),
+date TEXT);
+
+// Select All
+
+SELECT * FROM Project;
+

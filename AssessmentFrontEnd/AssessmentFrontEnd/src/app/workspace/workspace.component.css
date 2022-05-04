@@ -1,0 +1,21 @@
+:host {
+  font-family: Arial
+}
+
+.header {
+    font-weight: 700;
+    font-size: 2rem
+}
+
+.container {
+  display: flex;
+  flex-direction: row;
+}
+
+.employee-container {
+    width: 50%;
+}
+
+.project-container {
+    width: 50%;
+}

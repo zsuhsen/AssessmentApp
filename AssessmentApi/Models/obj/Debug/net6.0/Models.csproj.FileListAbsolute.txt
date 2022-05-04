@@ -1,0 +1,12 @@
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.csproj.AssemblyReference.cache
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.GeneratedMSBuildEditorConfig.editorconfig
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.AssemblyInfoInputs.cache
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.AssemblyInfo.cs
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.csproj.CoreCompileInputs.cache
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\bin\Debug\net6.0\Models.deps.json
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\bin\Debug\net6.0\Models.dll
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\bin\Debug\net6.0\Models.pdb
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.dll
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\refint\Models.dll
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\Models.pdb
+C:\Zacharys_Files\Projects\Assessment\AssessmentApi\Models\obj\Debug\net6.0\ref\Models.dll
