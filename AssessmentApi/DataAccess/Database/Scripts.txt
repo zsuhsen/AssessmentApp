@@ -4,7 +4,6 @@
 ### Employee Table
 
 // Create
-
 CREATE TABLE IF NOT EXISTS Employee 
 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
 name VARCHAR(50), 
@@ -12,13 +11,14 @@ phoneNumber VARCHAR(12),
 email VARCHAR(75));
 
 // Select all 
-
 SELECT * FROM Employee;
+
+// Add Column fax
+ALTER TABLE Employee ADD COLUMN fax VARCHAR(12);
 
 ### Project Table
 
 // Create
-
 CREATE TABLE IF NOT EXISTS Project
 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
 name VARCHAR(50),
@@ -26,6 +26,5 @@ contact VARCHAR(50),
 date TEXT);
 
 // Select All
-
 SELECT * FROM Project;
 

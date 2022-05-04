@@ -13,6 +13,9 @@ export class EmployeeComponent implements OnInit {
 
   isLoaded: boolean = false;
 
+  enableAddUpdate: boolean = false;
+  employeeToUpdate: IEmployee;
+
   employees: IEmployee[];
 
   constructor(private employeeService: EmployeeService) {
@@ -30,14 +33,30 @@ export class EmployeeComponent implements OnInit {
   onSave(employee: IEmployee) {
     this.employeeService.saveEmployee(employee).pipe(first()).subscribe((result: IEmployee) => {
       console.log({ result });
-      if (result.id > 0) {
+      if (result?.id > 0) {
         this.employees.push(employee);
+      } else {
+        const updatedEmpIndex = this.employees.findIndex(e => e.id === employee.id);
+        this.employees.splice(updatedEmpIndex, 1, employee);
       }
+
+
+      this.employeeToUpdate = null;
+      this.enableAddUpdate = false;
     });
   }
 
-  onUpdate(employee: any) {
+  onAddUpdate(employee?: IEmployee) {
+    if (employee) {
+      this.employeeToUpdate = employee;
+    }
+    this.enableAddUpdate = true;
     console.log('employee delete', employee);
+  }
+
+  onCloseAddUpdate() {
+    this.employeeToUpdate = null;
+    this.enableAddUpdate = false;
   }
 
   onDelete(employee: IEmployee) {

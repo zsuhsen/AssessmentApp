@@ -1,4 +1,4 @@
-import { EventEmitter } from "@angular/core";
+import { EventEmitter, OnDestroy } from "@angular/core";
 import { Component, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { first } from "rxjs";
@@ -15,8 +15,8 @@ export class EmployeeCrudComponent implements OnInit {
   @Input() employee: IEmployee;
   @Output() save: EventEmitter<IEmployee> = new EventEmitter<IEmployee>();
 
-  phoneNumberRegEx: RegExp = new RegExp(/^[0-9]{0,3}[-]\*{0,1}[0-9]{0,3}[-]\*{0,1}[0-9]{0,4}$/);
-  emailRegEx: RegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
+  private phoneNumberRegEx: RegExp = new RegExp(/^[0-9]{0,3}[-]\*{0,1}[0-9]{0,3}[-]\*{0,1}[0-9]{0,4}$/);
+  private emailRegEx: RegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
   employeeForm: FormGroup;
 
@@ -26,15 +26,15 @@ export class EmployeeCrudComponent implements OnInit {
 
   ngOnInit() {
     this.employeeForm = this.formBuilder.group({
-      name: new FormControl('', Validators.required),
-      phoneNumber: new FormControl('', [Validators.required, this.phoneNumberValidator()]),
-      email: new FormControl('', [Validators.required, this.emailValidator()])
+      name: new FormControl(this.employee ? this.employee.name : '', Validators.required),
+      phoneNumber: new FormControl(this.employee ? this.employee.phoneNumber : '', [Validators.required, this.phoneNumberValidator()]),
+      fax: new FormControl(this.employee ? this.employee.fax : '', [Validators.required, this.phoneNumberValidator()]),
+      email: new FormControl(this.employee ? this.employee.email : '', [Validators.required, this.emailValidator()])
     });
   }
 
   onSumbit() {
     const newEmployee: IEmployee = Object.assign({}, this.employee, this.employeeForm.value);
-    console.log('newEmployee', newEmployee);
     this.save.emit(newEmployee);
   }
 

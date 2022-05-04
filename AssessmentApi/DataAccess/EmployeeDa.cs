@@ -44,7 +44,8 @@ namespace DataAccess
                     Id = reader.GetInt32(0),
                     Name = reader.GetString(1),
                     PhoneNumber = reader.GetString(2),
-                    Email = reader.GetString(3)
+                    Email = reader.GetString(3),
+                    Fax = reader.GetString(4)
                 });
             }
 
@@ -61,8 +62,8 @@ namespace DataAccess
             SQLiteCommand command;
 
             command = conn.CreateCommand();
-            command.CommandText = $"INSERT INTO Employee (name, phoneNumber, email)" +
-                $"VALUES ('{employee.Name}', '{employee.PhoneNumber}', '{employee.Email}')";
+            command.CommandText = $"INSERT INTO Employee (name, phoneNumber, email, fax)" +
+                $"VALUES ('{employee.Name}', '{employee.PhoneNumber}', '{employee.Email}', '{employee.Fax}')";
 
             Employee result;
             try
@@ -85,7 +86,34 @@ namespace DataAccess
 
         public int Update(Employee employee)
         {
-            return employee.Id;
+            var conn = Connection.CreateConnection();
+
+            SQLiteDataReader reader;
+            SQLiteCommand command;
+
+            command = conn.CreateCommand();
+            command.CommandText = $"UPDATE Employee SET " +
+                $"name = '{employee.Name}'," +
+                $"phoneNumber = '{employee.PhoneNumber}'," +
+                $"fax = '{employee.Fax}'," +
+                $"email = '{employee.Email}'" +
+                $"WHERE id = {employee.Id};";
+
+            int result;
+            try
+            {
+                command.ExecuteNonQuery();
+
+                result = employee.Id;
+            }
+            catch (Exception e)
+            {
+                result = 0;
+            }
+
+            conn.Close();
+
+            return result;
         }
 
         public bool Delete(int employeeId)

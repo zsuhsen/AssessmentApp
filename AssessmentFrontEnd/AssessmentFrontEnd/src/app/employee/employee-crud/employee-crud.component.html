@@ -1,15 +1,21 @@
 <div *ngIf="employeeForm">
   <form [formGroup]="employeeForm">
     <div>
-      <input id="name" type="text" formControlName="name">
+      <input id="name" type="text" placeholder="Full Name" formControlName="name">
     </div>
     <div>
-      <input id="phoneNumber" type="text" placeholder="###-###-####" formControlName="phoneNumber">
+      <input id="phoneNumber" type="text" placeholder="Phone Number" formControlName="phoneNumber">
       <div class="errors" *ngIf="employeeForm.get('phoneNumber').dirty">
         <span *ngIf="employeeForm.get('phoneNumber').errors?.['invalid']">Must be format ###-###-####</span>
         <span *ngIf="employeeForm.get('phoneNumber').errors?.['required']">Required!</span>
       </div>
-
+    </div>
+    <div>
+      <input id="fax" type="text" placeholder="Fax Number" formControlName="fax">
+      <div class="errors" *ngIf="employeeForm.get('fax').dirty">
+        <span *ngIf="employeeForm.get('fax').errors?.['invalid']">Must be format ###-###-####</span>
+        <span *ngIf="employeeForm.get('fax').errors?.['required']">Required!</span>
+      </div>
     </div>
     <div>
       <input id="email" type="text" placeholder="abc@email.net" formControlName="email">

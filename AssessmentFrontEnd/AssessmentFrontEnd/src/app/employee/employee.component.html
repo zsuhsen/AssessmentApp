@@ -1,23 +1,34 @@
-<table *ngIf="isLoaded">
-  <thead>
-    <tr>
-      <th>Name</th>
-      <th>Phone Number</th>
-      <th>Email</th>
-      <th>Actions</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let employee of employees">
-      <td>{{employee.name}}</td>
-      <td>{{employee.phoneNumber}}</td>
-      <td>{{employee.email}}</td>
-      <td>
-        <button type="button" (click)="onUpdate(employee)">Update</button>
-        <button type="button" (click)="onDelete(employee)">Delete</button>
-      </td>
-    </tr>
-  </tbody>
- </table>
+<div class="table-container">
+  <table *ngIf="isLoaded">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Phone Number</th>
+        <th>Fax</th>
+        <th>Email</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let employee of employees">
+        <td>{{employee.name}}</td>
+        <td>{{employee.phoneNumber}}</td>
+        <td>{{employee.fax}}</td>
+        <td>{{employee.email}}</td>
+        <td>
+          <button type="button" (click)="onAddUpdate(employee)">Update</button>
+          <button type="button" (click)="onDelete(employee)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
- <employee-crud (save)="onSave($event)"></employee-crud>
+  <button *ngIf="!enableAddUpdate" type="button" (click)="onAddUpdate()">Add Employee</button>
+  <button *ngIf="enableAddUpdate" type="button" (click)="onCloseAddUpdate()">Cancel Add/Update</button>
+</div>
+
+<div class="crud-container">
+  <employee-crud *ngIf="enableAddUpdate" [employee]="employeeToUpdate" (save)="onSave($event)"></employee-crud>
+</div>
+
+
