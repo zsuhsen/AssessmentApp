@@ -1,30 +1,32 @@
 <div *ngIf="employeeForm">
   <form [formGroup]="employeeForm">
-    <div>
+    <div class="form-padding">
       <input id="name" type="text" placeholder="Full Name" formControlName="name">
     </div>
-    <div>
+    <div class="form-padding">
       <input id="jobTitle" type="text" placeholder="Job Title" formControlName="jobTitle">
     </div>
-    <div>
+    <div class="form-padding">
       <input id="phoneNumber" type="text" placeholder="Phone Number" formControlName="phoneNumber">
       <div class="error" *ngIf="employeeForm.get('phoneNumber').dirty">
         <span *ngIf="employeeForm.get('phoneNumber').errors?.['invalid']">Must be format ###-###-####</span>
       </div>
     </div>
-    <div>
+    <div class="form-padding">
       <input id="fax" type="text" placeholder="Fax Number" formControlName="fax">
       <div class="error" *ngIf="employeeForm.get('fax').dirty">
         <span *ngIf="employeeForm.get('fax').errors?.['invalid']">Must be format ###-###-####</span>
       </div>
     </div>
-    <div>
+    <div class="form-padding">
       <input id="email" type="text" placeholder="abc@email.net" formControlName="email">
       <div class="error" *ngIf="employeeForm.get('email').dirty">
         <span *ngIf="employeeForm.get('email').errors?.['invalid']">Must be format abc@email.net</span>
       </div>
     </div>
-    <button (click)="onSumbit()">{{employee ? 'Edit Employee' : 'Add Employee'}}</button>
-    <span *ngIf="!employeeForm.valid && employeeForm.dirty" class="error">Add Missing Form Values</span>
+    <div class="form-padding">
+      <button class="form-padding" (click)="onSumbit()">{{employee ? 'Edit Employee' : 'Add Employee'}}</button>
+      <span *ngIf="!employeeForm.valid && employeeForm.dirty" class="error">Add Missing Form Values</span>
+    </div>
   </form>
 </div>

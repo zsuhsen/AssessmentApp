@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
+import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { IEmployee } from "../../employee/employee.model";
 import { EmployeeService } from "../../employee/services/employee.service";
@@ -9,10 +9,9 @@ import { IProject, ProjectStatus } from "../project.model";
   templateUrl: './project-crud.component.html',
   styleUrls: ['./project-crud.component.css']
 })
-export class ProjectCrudComponent implements OnInit {
-
+export class ProjectCrudComponent implements OnInit, OnChanges {
   @Input() project: IProject;
-  @Input() employeeOptions: { value: IEmployee, label: string };
+  @Input() employees: IEmployee[];
   @Output() save: EventEmitter<IProject> = new EventEmitter<IProject>();
 
   private dateRegEx: RegExp = new RegExp(/^(0[1-9]|1[0-2])[/]\*{0,1}(([0]?[1-9])|([1-2][0-9])|(3[01]))[/]\*{0,1}[0-9]{4}$/);
@@ -27,13 +26,31 @@ export class ProjectCrudComponent implements OnInit {
 
   ngOnInit() {
     this.setStatusOptions();
+    this.setForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['project'].firstChange && changes['project'].currentValue) {
+      this.setForm();
+    }
+  }
+
+  setForm() {
     this.projectForm = this.formBuilder.group({
       name: new FormControl(this.project?.name, Validators.required),
       date: new FormControl(this.project?.date, [Validators.required, this.dateValidator()]),
-      status: new FormControl(this.project?.status),
-      contact: new FormControl(this.project?.contact),
+      status: new FormControl(this.project?.status ? this.project.status : ProjectStatus.NotStarted),
+      contact: new FormControl(this.getContactOption(), Validators.required),
       description: new FormControl(this.project?.description, [Validators.required, Validators.maxLength(100)])
     });
+  }
+
+  getContactOption(): any {
+    if (this.project?.contact) {
+      console.log(this.employees);
+      return this.employees.find(e => e.id === this.project.contact.id);
+    }
+    return null
   }
 
   onSumbit() {

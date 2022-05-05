@@ -1,4 +1,4 @@
-import { EventEmitter, OnDestroy } from "@angular/core";
+import { EventEmitter, OnChanges, OnDestroy, SimpleChanges } from "@angular/core";
 import { Component, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
 import { IEmployee } from "../employee.model";
@@ -8,8 +8,7 @@ import { IEmployee } from "../employee.model";
   templateUrl: './employee-crud.component.html',
   styleUrls: ['./employee-crud.component.css']
 })
-export class EmployeeCrudComponent implements OnInit {
-
+export class EmployeeCrudComponent implements OnInit, OnChanges {
   @Input() employee: IEmployee;
   @Output() save: EventEmitter<IEmployee> = new EventEmitter<IEmployee>();
 
@@ -23,6 +22,16 @@ export class EmployeeCrudComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.setForm();
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if (!changes['employee'].firstChange && changes['employee'].currentValue) {
+      this.setForm();
+    }
+  }
+
+  setForm() {
     this.employeeForm = this.formBuilder.group({
       name: new FormControl(this.employee ? this.employee.name : '', Validators.required),
       jobTitle: new FormControl(this.employee ? this.employee.jobTitle : '', Validators.required),

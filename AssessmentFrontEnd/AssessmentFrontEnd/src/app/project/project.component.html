@@ -11,5 +11,5 @@
 </div>
 
 <div class="crud-container">
-  <project-crud *ngIf="enableAddUpdate" [project]="projectToUpdate" [employeeOptions]="employeeOptions" (save)="onSave($event)"></project-crud>
+  <project-crud *ngIf="enableAddUpdate" [project]="projectToUpdate" [employees]="employees" (save)="onSave($event)"></project-crud>
 </div>

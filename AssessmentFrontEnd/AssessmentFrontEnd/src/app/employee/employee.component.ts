@@ -58,14 +58,12 @@ export class EmployeeComponent implements OnInit {
 
   onSave(employee: IEmployee) {
     this.employeeService.saveEmployee(employee).pipe(first()).subscribe((result: IEmployee) => {
-      console.log({ result });
       if (result?.id > 0) {
         this.employees.push(result);
       } else {
         const updatedEmpIndex = this.employees.findIndex(e => e.id === employee.id);
         this.employees.splice(updatedEmpIndex, 1, employee);
       }
-
 
       this.employeeToUpdate = null;
       this.enableAddUpdate = false;
@@ -86,7 +84,6 @@ export class EmployeeComponent implements OnInit {
 
   onDelete(id: number) {
     this.employeeService.deleteEmployee(id).pipe(first()).subscribe(result => {
-      console.log({ result });
       if (result) {
         const deletedEmpIndex = this.employees.findIndex(e => e.id === id);
 

@@ -3,3 +3,15 @@
 .error {
     color: red;
 }
+
+.crud-container {
+  padding-left: 6px;
+  display: flex;
+  align-content: flex-end;
+}
+
+.form-padding {
+  padding: 6px;
+}
+
+

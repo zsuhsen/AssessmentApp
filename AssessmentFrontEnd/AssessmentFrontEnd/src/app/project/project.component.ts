@@ -23,7 +23,7 @@ export class ProjectComponent implements OnInit {
   projects: IProject[];
 
   gridModel: IGridModel;
-  employeeOptions: { value: IEmployee, label: string }[]
+  employees: IEmployee[]
 
   constructor(private projectService: ProjectService,
     private employeeService: EmployeeService) {
@@ -37,9 +37,7 @@ export class ProjectComponent implements OnInit {
       this.isLoaded = true;
     });
     this.employeeService.getEmployees().pipe(first()).subscribe((employees: IEmployee[]) => {
-      this.employeeOptions = employees.filter(e => e.isActive).map(e => {
-        return { value: e, label: e.name }
-      });
+      this.employees = employees.filter(e => e.isActive);
     });
   }
 
@@ -81,9 +79,7 @@ export class ProjectComponent implements OnInit {
   }
 
   onSave(project: IProject) {
-    console.log(project);
     this.projectService.saveProject(project).pipe(first()).subscribe((result: IProject) => {
-      console.log({ result });
       if (result?.id > 0) {
         this.projects.push(result);
       } else {
@@ -111,7 +107,6 @@ export class ProjectComponent implements OnInit {
 
   onDelete(id: number) {
     this.projectService.deleteProject(id).pipe(first()).subscribe(result => {
-      console.log({ result });
       if (result) {
         const deletedEmpIndex = this.projects.findIndex(e => e.id === id);
 
