@@ -11,6 +11,7 @@ namespace Business
     public interface IEmployeeBo
     {
         public IList<Employee> Get();
+        public Employee GetById(int employeeId);
         public Employee Add(Employee employee);
         public int Update(Employee employee);
         public bool Delete(int employeeId);
@@ -28,6 +29,11 @@ namespace Business
         public IList<Employee> Get()
         {
             return _employeeDa.Get();
+        }
+
+        public Employee GetById(int employeeId)
+        {
+            return _employeeDa.GetById(employeeId);
         }
 
         public Employee Add(Employee employee)

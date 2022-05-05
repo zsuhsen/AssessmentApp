@@ -29,8 +29,17 @@ CREATE TABLE IF NOT EXISTS Project
 (id INTEGER PRIMARY KEY AUTOINCREMENT, 
 name VARCHAR(50),
 contact VARCHAR(50),
-date TEXT);
+date VARCHAR(10));
 
 // Select All
 SELECT * FROM Project;
+
+// Add Column status
+ALTER TABLE Project ADD COLUMN status INTEGER DEFAULT 0;
+
+// Add Column description
+ALTER TABLE Project ADD COLUMN description VARCHAR(100);
+
+// Add Column isDeleted
+ALTER TABLE Project ADD COLUMN isDeleted INTEGER DEFAULT 0;
 

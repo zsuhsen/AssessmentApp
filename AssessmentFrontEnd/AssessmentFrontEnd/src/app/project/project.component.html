@@ -1,0 +1,15 @@
+<div class="table-container" *ngIf="isLoaded">
+  <grid [gridModel]="gridModel" (onUpdate)="onAddUpdate($event)" (onDelete)="onDelete($event)">
+    <ng-template let-model>
+      Status: {{getStatusLabel(model.status)}}, Description: {{model.description}}
+    </ng-template>
+  </grid>
+
+  <button *ngIf="!enableAddUpdate" type="button" (click)="onAddUpdate()">New Project</button>
+  <button *ngIf="enableAddUpdate" type="button" (click)="onCloseAddUpdate()">Cancel</button>
+
+</div>
+
+<div class="crud-container">
+  <project-crud *ngIf="enableAddUpdate" [project]="projectToUpdate" [employeeOptions]="employeeOptions" (save)="onSave($event)"></project-crud>
+</div>

@@ -1,5 +1,6 @@
 import { NgModule } from "@angular/core";
 import { EmployeeModule } from "../employee/employee.module";
+import { ProjectModule } from "../project/project.module";
 import { WorkspaceComponent } from "./workspace.component";
 
 @NgModule({
@@ -10,7 +11,8 @@ import { WorkspaceComponent } from "./workspace.component";
     WorkspaceComponent
   ],
   imports: [
-    EmployeeModule
+    EmployeeModule,
+    ProjectModule
   ],
   providers: [],
   bootstrap: [WorkspaceComponent]

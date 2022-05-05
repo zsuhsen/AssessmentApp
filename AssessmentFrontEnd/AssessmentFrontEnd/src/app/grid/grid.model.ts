@@ -6,5 +6,6 @@ export interface IGridModel {
 
 export interface IGridColumnModel {
   header: string,
-  field: string
+  field: string,
+  valueGetter?: (obj) => string;
 }

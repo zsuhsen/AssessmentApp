@@ -1,3 +1,7 @@
+:host {
+    width: 100%;
+}
+
 .table-detail-container {
   height: 2rem;
   padding: 3px;
@@ -10,6 +14,7 @@ table {
 
 th, td {
   border-bottom: 1px solid #ddd;
+  padding: 3px;
   white-space: nowrap;
 }
 

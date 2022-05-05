@@ -10,8 +10,18 @@ namespace Models
     {
         public int Id { get; set; }
         public string? Name { get; set; }
-        public string? Contact { get; set; }
+        public Employee? Contact { get; set; }
         public string? Date { get; set; }
+        public ProjectStatus Status { get; set; }
+        public string? Description { get; set; }
+        public bool? IsDeleted { get; set; }
 
+    }
+
+    public enum ProjectStatus
+    {
+        NotStarted = 0,
+        InProgress = 1,
+        Completed = 2
     }
 }

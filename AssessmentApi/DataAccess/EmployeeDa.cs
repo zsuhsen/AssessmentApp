@@ -12,6 +12,7 @@ namespace DataAccess
     public interface IEmployeeDa
     {
         public IList<Employee> Get();
+        public Employee GetById(int employeeId);
         public Employee Add(Employee employee);
         public int Update(Employee employee);
         public bool Delete(int employeeId);
@@ -54,6 +55,39 @@ namespace DataAccess
             conn.Close();
 
             return employees;
+        }
+
+        public Employee GetById(int employeeId)
+        {
+            var conn = Connection.CreateConnection();
+
+            SQLiteDataReader reader;
+            SQLiteCommand command;
+
+            command = conn.CreateCommand();
+            command.CommandText = $"SELECT * FROM Employee WHERE id = {employeeId}";
+
+            reader = command.ExecuteReader();
+
+            var employees = new List<Employee>();
+
+            while (reader.Read())
+            {
+                employees.Add(new Employee()
+                {
+                    Id = reader.GetInt32(0),
+                    Name = reader.GetString(1),
+                    PhoneNumber = reader.GetString(2),
+                    Email = reader.GetString(3),
+                    Fax = reader.GetString(4),
+                    IsActive = reader.GetBoolean(5),
+                    JobTitle = reader.GetString(6)
+                });
+            }
+
+            conn.Close();
+
+            return employees.SingleOrDefault();
         }
 
         public Employee Add(Employee employee)
@@ -149,37 +183,6 @@ namespace DataAccess
             return result > 0;
         }
 
-        private Employee GetById(int employeeId)
-        {
-            var conn = Connection.CreateConnection();
-
-            SQLiteDataReader reader;
-            SQLiteCommand command;
-
-            command = conn.CreateCommand();
-            command.CommandText = $"SELECT * FROM Employee WHERE id = {employeeId}";
-
-            reader = command.ExecuteReader();
-
-            var employees = new List<Employee>();
-
-            while (reader.Read())
-            {
-                employees.Add(new Employee()
-                {
-                    Id = reader.GetInt32(0),
-                    Name = reader.GetString(1),
-                    PhoneNumber = reader.GetString(2),
-                    Email = reader.GetString(3),
-                    Fax = reader.GetString(4),
-                    IsActive = reader.GetBoolean(5),
-                    JobTitle = reader.GetString(6)
-                });
-            }
-
-            conn.Close();
-
-            return employees.SingleOrDefault();
-        }
+        
     }
 }

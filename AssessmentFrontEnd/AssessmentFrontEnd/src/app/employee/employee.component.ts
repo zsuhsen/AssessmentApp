@@ -95,8 +95,4 @@ export class EmployeeComponent implements OnInit {
     });
   }
 
-  openDetail(id: number) {
-    this.selectedDetail = this.selectedDetail !== id ? id : null;
-  }
-
 }

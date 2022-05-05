@@ -9,7 +9,7 @@
   <tbody *ngFor="let model of gridModel.data">
     <tr>
       <td><button type="button" (click)="openDetail(model)">...</button></td>
-      <td class="dynamic-column" *ngFor="let col of gridModel.columns">{{model[col.field]}}</td>
+      <td class="dynamic-column" *ngFor="let col of gridModel.columns">{{col.valueGetter ? col.valueGetter(model[col.field]) : model[col.field]}}</td>
       <td>
         <button type="button" (click)="onUpdate.emit(model)">Edit</button>
         <button type="button" (click)="onDelete.emit(model[gridModel.idField])">Delete</button>

@@ -1,5 +1,6 @@
 using Business;
 using Microsoft.AspNetCore.Mvc;
+using Models;
 
 namespace AssessmentApi.Controllers
 {
@@ -14,9 +15,27 @@ namespace AssessmentApi.Controllers
         }
 
         [HttpGet("")]
-        public dynamic Get()
+        public IList<Project> Get()
         {
-            return _projectBo.GetProjects();
+            return _projectBo.Get();
+        }
+
+        [HttpPost("")]
+        public Project Add([FromBody] Project project)
+        {
+            return _projectBo.Add(project);
+        }
+
+        [HttpPut("")]
+        public int Update([FromBody] Project project)
+        {
+            return _projectBo.Update(project);
+        }
+
+        [HttpDelete("{id}")]
+        public bool Delete([FromRoute] int id)
+        {
+            return _projectBo.Delete(id);
         }
     }
 }

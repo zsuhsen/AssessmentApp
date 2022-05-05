@@ -1,9 +1,7 @@
 import { EventEmitter, OnDestroy } from "@angular/core";
 import { Component, Input, OnInit, Output } from "@angular/core";
 import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from "@angular/forms";
-import { first } from "rxjs";
 import { IEmployee } from "../employee.model";
-import { EmployeeService } from "../services/employee.service";
 
 @Component({
   selector: 'employee-crud',
@@ -15,7 +13,7 @@ export class EmployeeCrudComponent implements OnInit {
   @Input() employee: IEmployee;
   @Output() save: EventEmitter<IEmployee> = new EventEmitter<IEmployee>();
 
-  private phoneNumberRegEx: RegExp = new RegExp(/^[0-9]{0,3}[-]\*{0,1}[0-9]{0,3}[-]\*{0,1}[0-9]{0,4}$/);
+  private phoneNumberRegEx: RegExp = new RegExp(/^[0-9]{3}[-]\*{0,1}[0-9]{3}[-]\*{0,1}[0-9]{4}$/);
   private emailRegEx: RegExp = new RegExp(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/);
 
   employeeForm: FormGroup;

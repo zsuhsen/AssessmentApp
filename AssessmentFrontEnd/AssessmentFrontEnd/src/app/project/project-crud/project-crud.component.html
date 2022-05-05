@@ -1,0 +1,29 @@
+<div *ngIf="projectForm">
+  <form [formGroup]="projectForm">
+    <div>
+      <input id="name" type="text" placeholder="Project Name" formControlName="name">
+    </div>
+    <div>
+      <input id="date" type="text" placeholder="Date" formControlName="date">
+      <div class="error" *ngIf="projectForm.get('date').dirty">
+        <span *ngIf="projectForm.get('date').errors?.['invalid']">Must be format mm/dd/yyyy</span>
+      </div>
+    </div>
+    <div>
+      <select id="status" formControlName="status">
+        <option *ngFor="let statusOption of statusOptions" [ngValue]="statusOption.value">{{statusOption.label}}</option>
+      </select>
+    </div>
+    <div>
+      <select id="contact" formControlName="contact">
+        <option value="default">Select Contact</option>
+        <option *ngFor="let employeeOption of employeeOptions" [ngValue]="employeeOption.value">{{employeeOption.label}}</option>
+      </select>
+    </div>
+    <div>
+      <textarea id="description" maxlength="100" placeholder="Description..." formControlName="description"></textarea>
+    </div>
+    <button (click)="onSumbit()">{{employee ? 'Edit Employee' : 'Add Employee'}}</button>
+    <span *ngIf="!projectForm.valid && projectForm.dirty" class="error">Add Missing Form Values</span>
+  </form>
+</div>

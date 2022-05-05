@@ -1,4 +1,5 @@
 ﻿using DataAccess;
+using Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +10,10 @@ namespace Business
 {
     public interface IProjectBo
     {
-        public dynamic GetProjects();
+        public IList<Project> Get();
+        public Project Add(Project project);
+        public int Update(Project project);
+        public bool Delete(int projectId);
     }
 
     public class ProjectBo : IProjectBo
@@ -20,9 +24,24 @@ namespace Business
             _projectDa = projectDa;
         }
 
-        public dynamic GetProjects()
+        public IList<Project> Get()
         {
-            return _projectDa.GetProjects();
+            return _projectDa.Get();
+        }
+
+        public Project Add(Project project)
+        {
+            return _projectDa.Add(project);
+        }
+
+        public int Update(Project project)
+        {
+            return _projectDa.Update(project);
+        }
+
+        public bool Delete(int projectId)
+        {
+            return _projectDa.Delete(projectId);
         }
     }
 }
