@@ -141,7 +141,7 @@ namespace DataAccess
             command = conn.CreateCommand();
             command.CommandText = $"UPDATE Project SET " +
                 $"name = '{project.Name}'," +
-                $"contact = '{project.Contact}'," +
+                $"contact = '{JsonConvert.SerializeObject(project.Contact)}'," +
                 $"date = '{project.Date}'," +
                 $"status = {(int)project.Status}," +
                 $"description = '{project.Description}' " +

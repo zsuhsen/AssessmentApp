@@ -47,7 +47,6 @@ export class ProjectCrudComponent implements OnInit, OnChanges {
 
   getContactOption(): any {
     if (this.project?.contact) {
-      console.log(this.employees);
       return this.employees.find(e => e.id === this.project.contact.id);
     }
     return null
