@@ -1,7 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 
+
 .error {
-    color: red;
+  color: red;
+  height: 2rem;
 }
 
 .crud-container {
@@ -11,7 +13,65 @@
 }
 
 .form-padding {
-  padding: 6px;
+    padding: 6px;
+}
+
+.wrapper {
+  position: relative;
+  min-height: 2.5rem;
+}
+
+select {
+  border: 0;
+  outline: 0;
+  padding: 0.1rem 0;
+  border-bottom: 1px solid black;
+  box-shadow: none;
+  background-color: transparent;
+  font-family: Arial;
+  font-size: 1rem;
+}
+
+option {
+  font-family: Arial;
+  font-size: 1rem;
+}
+
+textarea {
+  font-family: Arial;
+  font-size: 1rem;
+  border: 1px solid black;
+  border-radius: 3px;
+}
+
+label {
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: 0.1s all;
+  cursor: text;
+  font-size: 1rem;
+  color: dimgray;
+}
+
+input {
+  border: 0;
+  outline: 0;
+  padding: 0.1rem 0;
+  border-bottom: 1px solid black;
+  box-shadow: none;
+  background-color: transparent;
+  font-size: 1rem;
+}
+
+input:focus ~ label,
+input:not(:placeholder-shown) ~ label {
+  font-size: 10px;
+  top: -1rem;
+}
+
+button {
+  font-size: 1rem;
 }
 
 

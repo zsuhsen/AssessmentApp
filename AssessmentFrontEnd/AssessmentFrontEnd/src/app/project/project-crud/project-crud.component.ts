@@ -75,4 +75,14 @@ export class ProjectCrudComponent implements OnInit, OnChanges {
       return invalid ? { invalid: { value: control.value } } : null;
     };
   }
+
+  onBlur(formControlName: string) {
+    const control = this.projectForm.get(formControlName);
+
+    if (control.value === '') {
+      control.markAsPristine();
+      control.markAsUntouched();
+      control.updateValueAndValidity();
+    }
+  }
 }

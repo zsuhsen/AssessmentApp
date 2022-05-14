@@ -63,4 +63,14 @@ export class EmployeeCrudComponent implements OnInit, OnChanges {
       return invalid ? { invalid: { value: control.value } } : null;
     };
   }
+
+  onBlur(formControlName: string) {
+    const control = this.employeeForm.get(formControlName);
+
+    if (control.value === '') {
+      control.markAsPristine();
+      control.markAsUntouched();
+      control.updateValueAndValidity();
+    }
+  }
 }

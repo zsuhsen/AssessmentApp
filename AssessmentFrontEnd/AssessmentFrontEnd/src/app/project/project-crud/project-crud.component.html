@@ -1,29 +1,31 @@
 <div *ngIf="projectForm">
   <form [formGroup]="projectForm">
-    <div class="form-padding">
-      <input id="name" type="text" placeholder="Project Name" formControlName="name">
+    <div class="wrapper">
+      <input id="name" type="text" placeholder=" " formControlName="name" (blur)="onBlur('name')" />
+      <label for="name">Project Name</label>
     </div>
-    <div class="form-padding">
-      <input id="date" type="text" placeholder="Date" formControlName="date">
+    <div class="wrapper">
+      <input id="date" type="text" placeholder=" " formControlName="date" (blur)="onBlur('date')" />
+      <label for="date">Date</label>
       <div class="error" *ngIf="projectForm.get('date').dirty">
         <span *ngIf="projectForm.get('date').errors?.['invalid']">Must be format mm/dd/yyyy</span>
       </div>
     </div>
-    <div class="form-padding">
+    <div class="wrapper">
       <select id="status" formControlName="status">
         <option *ngFor="let statusOption of statusOptions" [ngValue]="statusOption.value">{{statusOption.label}}</option>
       </select>
     </div>
-    <div class="form-padding">
+    <div class="wrapper">
       <select id="contact" formControlName="contact">
         <option *ngFor="let employee of employees" [ngValue]="employee">{{employee.name}}</option>
       </select>
     </div>
-    <div class="form-padding">
+    <div class="wrapper">
       <textarea id="description" maxlength="100" placeholder="Description..." formControlName="description"></textarea>
     </div>
-    <div class="form-padding">
-      <button (click)="onSumbit()">{{project ? 'Edit Project' : 'Add Project'}}</button>
+    <div>
+      <button class="form-padding" (click)="onSumbit()">{{project ? 'Edit Project' : 'Add Project'}}</button>
       <span *ngIf="!projectForm.valid && projectForm.dirty" class="error">Add Missing Form Values</span>
     </div>
   </form>
